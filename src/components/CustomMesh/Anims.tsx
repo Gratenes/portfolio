@@ -1,6 +1,6 @@
-import { MeshAnim }       from "./CustomMesh//MeshAnim";
-import noise, { perlin3 } from "./CustomMesh/noise";
-import { randomSin }      from './CustomMesh/math';
+import { MeshAnim }       from "./MeshAnim";
+import noise, { perlin3 } from "./noise";
+import { randomSin }      from './math';
 
 export function GrowingExp({ position }:{
   position: [number, number, number]

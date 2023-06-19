@@ -6,6 +6,8 @@ import Island from '@/components/Island'
 
 import { PerspectiveCamera, CameraControls } from '@react-three/drei'
 import { Bloom, EffectComposer, Select, Selection, Noise } from '@react-three/postprocessing'
+import Fog from "@/effects/Fog";
+import Sky, {RiseBasedOnTime} from "@/components/Sky";
 
 export function ThreeD() {
   const rotateRef   = useRef<any>()
@@ -60,6 +62,9 @@ export function ThreeD() {
               <islands.Bloom/>
             </group>
 
+          <Sky />
+          <RiseBasedOnTime time={.5} />
+
 
 
           <EffectComposer>
@@ -88,7 +93,7 @@ export default function Home() {
       </div>
       <div
         style={{
-          background: 'linear-gradient(90deg, #FF008C 0%, #FF8C00 100%)',
+          background: 'black',
           height    : '100vh',
           width     : '100vw',
           position  : 'absolute',
