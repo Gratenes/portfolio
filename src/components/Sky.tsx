@@ -1,6 +1,6 @@
 import {useFrame} from "@react-three/fiber";
 import {MutableRefObject, useEffect, useRef} from "react";
-import THREE, {Mesh, MeshBasicMaterial, Object3D, TextureLoader} from "three";
+import THREE, {Mesh, AmbientLight, MeshBasicMaterial, Object3D, TextureLoader} from "three";
 
 
 export default function Stars() {
@@ -28,7 +28,7 @@ export default function Stars() {
 
 		return (
 			<mesh position={position} key={i}>
-				<sphereBufferGeometry
+				<sphereGeometry
 					attach="geometry"
 					args={[Math.random() * (maxSize - minSize) + minSize]}
 				/>
@@ -43,7 +43,7 @@ export default function Stars() {
 function Sun () {
 	return (
 		<mesh>
-			<sphereBufferGeometry
+			<sphereGeometry
 				attach="geometry"
 				args={[10]}
 			/>
@@ -70,15 +70,23 @@ function Moon () {
 				console.error(err);
 			}
 		);
+
+		if (!moon.current) return
+		console.log(moon.current)
+
 	}, [])
 
 	return (
 		<mesh>
-			<sphereBufferGeometry
+			<sphereGeometry
 				attach="geometry"
 				args={[10]}
+
 			/>
-			<meshBasicMaterial color={0xaaaaaa} ref={moon as any} />
+			<ambientLight intensity={0.1} />
+			<meshBasicMaterial
+		    color={"white"}
+		    ref={moon as any} />
 		</mesh>
 	);
 }
@@ -102,9 +110,15 @@ export function RiseBasedOnTime(props: {
 		position.current.position.x = Math.sin(
 			clock.elapsedTime * 0.05
 		) * radius;
-		position.current.position.y = Math.cos(
+		position.current.position.y = Math.sin(
 			clock.elapsedTime * 0.05
 		) * radius;
+		position.current.position.z = Math.cos(
+			clock.elapsedTime * 0.05
+		) * radius;
+
+
+		position.current
 	})
 
 	return (

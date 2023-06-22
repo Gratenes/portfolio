@@ -18,7 +18,7 @@ export default function Island() {
           gltf.scene.children[i].material.emissive         = { r: 2, g: 2, b: 2 }  // @ts-ignore
           gltf.scene.children[i].material.specularColor    = { r: 2, g: 2, b: 2 }  // @ts-ignore
           gltf.scene.children[i].material.specularColor    = { r: 2, g: 2, b: 2 }  // @ts-ignore
-          gltf.scene.children[i].material.emissiveIntensity = 2                   // @ts-ignore
+          gltf.scene.children[i].material.emissiveIntensity = 2                   // @ts-ignore This actually does stuff aka bloom
           console.log(gltf.scene.children[i].material)
         }
       }

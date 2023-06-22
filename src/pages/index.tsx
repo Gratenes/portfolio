@@ -6,8 +6,8 @@ import Island from '@/components/Island'
 
 import { PerspectiveCamera, CameraControls } from '@react-three/drei'
 import { Bloom, EffectComposer, Select, Selection, Noise } from '@react-three/postprocessing'
-import Fog from "@/effects/Fog";
 import Sky, {RiseBasedOnTime} from "@/components/Sky";
+import Animation from "@/effects/Animation"
 
 export function ThreeD() {
   const rotateRef   = useRef<any>()
@@ -29,10 +29,13 @@ export function ThreeD() {
   const islands = Island()
   const BloomRef = useRef<any>()
 
+  const [enableControls, setEnableControls] = useState(false)
+
   return (
     <>
           <PerspectiveCamera makeDefault position={[0, 0, 10]} ref={cameraRef} />
-          <CameraControls ref={controlsRef} camera={cameraRef.current} /> 
+          <Animation shouldAnimate={!enableControls} />
+      {enableControls && <CameraControls ref={controlsRef} camera={cameraRef.current}/>}
           <ambientLight intensity={0.1} />
           <spotLight
             position  = {[0, 100, 0]}
