@@ -1,8 +1,8 @@
-import { MeshAnim }       from "./MeshAnim";
-import noise, { perlin3 } from "./noise";
-import { randomSin }      from './math';
+import {MeshAnim} from "./MeshAnim";
+import noise, {perlin3} from "./noise";
+import {randomSin} from './math';
 
-export function GrowingExp({ position }:{
+export function GrowingExp({position}: {
   position: [number, number, number]
 }) {
   const zOfXYT = (x: number, y: number, t: number) => {
@@ -24,17 +24,17 @@ export function GrowingExp({ position }:{
 
   return (
     <MeshAnim
-      position = {position}
-      rotation = {[-Math.PI / 2, 0, 0]}
-      grid     = {{
-        width : 100,
+      position={position}
+      rotation={[-Math.PI / 2, 0, 0]}
+      grid={{
+        width: 100,
         height: 100,
-        sep   : 0.1
+        sep: 0.1
       }}
-      zOfXYT      = {zOfXYT}
-      colorOfXYZT = {colorOfXYZT}
-      anim        = {{
-        init  : 0,
+      zOfXYT={zOfXYT}
+      colorOfXYZT={colorOfXYZT}
+      anim={{
+        init: 0,
         update: (t) => {
           return t + 1
         }
@@ -43,7 +43,7 @@ export function GrowingExp({ position }:{
   );
 }
 
-export function Ripple({ position }:{
+export function Ripple({position}: {
   position: [number, number, number]
 }) {
   const zOfXYT = (x: number, y: number, t: number) => {
@@ -60,25 +60,25 @@ export function Ripple({ position }:{
 
   return (
     <MeshAnim
-      position = {position}
-      grid     = {{
-        width : 100,
+      position={position}
+      grid={{
+        width: 100,
         height: 100,
-        sep   : 0.1
+        sep: 0.1
       }}
-      zOfXYT      = {zOfXYT}
-      colorOfXYZT = {colorOfXYZT}
-      anim        = {{
-        init  : 0,
+      zOfXYT={zOfXYT}
+      colorOfXYZT={colorOfXYZT}
+      anim={{
+        init: 0,
         update: (t) => {
           return t + 0.1;
         }
-      }} rotation={[0,0,0]}    />
+      }} rotation={[0, 0, 0]}/>
   );
 
 }
 
-export function Terrain({ position, rotation }:{
+export function Terrain({position, rotation}: {
   position: [number, number, number],
   rotation: [number, number, number]
 }) {
@@ -86,18 +86,18 @@ export function Terrain({ position, rotation }:{
   noise.seed(seed)
 
   const sampleNoise = (x: number, y: number, z: any) => {
-    let scale       = 1 / 8
-    let octaves     = 20
+    let scale = 1 / 8
+    let octaves = 20
     let persistence = 0.6
-    let lacunarity  = 2
+    let lacunarity = 2
 
-    let amp  = 1
+    let amp = 1
     let freq = 1
 
     let v = 0
     for (let i = 0; i < octaves; i++) {
-      v    += amp * perlin3(x * freq * scale, y * freq * scale, z)
-      amp  *= persistence
+      v += amp * perlin3(x * freq * scale, y * freq * scale, z)
+      amp *= persistence
       freq *= lacunarity
     }
 
@@ -109,9 +109,9 @@ export function Terrain({ position, rotation }:{
   }
 
   const colorOfXYZT = (x: number, y: number, z: number, t: any) => {
-    const localRandom = randomSin(1001*x-7*y+seed)
-    const variation   = () => {
-      return localRandom()*0.01;
+    const localRandom = randomSin(1001 * x - 7 * y + seed)
+    const variation = () => {
+      return localRandom() * 0.01;
     }
 
     return {
@@ -127,16 +127,16 @@ export function Terrain({ position, rotation }:{
 
   return (
     <MeshAnim
-      position = {position}
-      rotation = {rotation}
-      grid     = {{
-        width : 100,
+      position={position}
+      rotation={rotation}
+      grid={{
+        width: 100,
         height: 100,
-        sep   : .2
+        sep: .2
       }}
-      zOfXYT      = {zOfXYT}
-      colorOfXYZT = {colorOfXYZT}
-      anim        = {{
+      zOfXYT={zOfXYT}
+      colorOfXYZT={colorOfXYZT}
+      anim={{
         init: 0,
         update
       }}

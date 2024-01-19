@@ -25,9 +25,11 @@ class Grad {
     this.y = y
     this.z = z
   }
+
   dot2(x: number, y: number) {
     return this.x * x + this.y * y
   }
+
   dot3(x: number, y: number, z: number) {
     return this.x * x + this.y * y + this.z * z
   }
@@ -602,7 +604,7 @@ let noise: {
 
 export default noise
 let perlin3 = noise.perlin3
-export { perlin3 }
+export {perlin3}
 /*
 function Grad(x: number, y: number, z: number) {
     return {x: x, y: y, z: z};

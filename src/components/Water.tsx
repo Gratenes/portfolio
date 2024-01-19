@@ -1,9 +1,8 @@
-import { DoubleSide } from "three";
-import { randomSin } from "./CustomMesh/math";
-import { MeshAnim } from "./CustomMesh/MeshAnim";
-import noise, { perlin3 } from "./CustomMesh/noise";
+import {randomSin} from "./CustomMesh/math";
+import {MeshAnim} from "./CustomMesh/MeshAnim";
+import noise, {perlin3} from "./CustomMesh/noise";
 
-export default function Water({ position, rotation }:{
+export default function Water({position, rotation}: {
   position: [number, number, number],
   rotation: [number, number, number]
 }) {
@@ -11,18 +10,18 @@ export default function Water({ position, rotation }:{
   noise.seed(seed)
 
   const sampleNoise = (x: number, y: number, z: any) => {
-    let scale       = 1 / 8
-    let octaves     = 20
+    let scale = 1 / 8
+    let octaves = 20
     let persistence = 0.6
-    let lacunarity  = 2
+    let lacunarity = 2
 
-    let amp  = 1
+    let amp = 1
     let freq = 1
 
     let v = 0
     for (let i = 0; i < octaves; i++) {
-      v    += amp * perlin3(x * freq * scale, y * freq * scale, z)
-      amp  *= persistence
+      v += amp * perlin3(x * freq * scale, y * freq * scale, z)
+      amp *= persistence
       freq *= lacunarity
     }
 
@@ -36,15 +35,15 @@ export default function Water({ position, rotation }:{
     ]
     switch (current[0]) {
       case 'circleInMiddle':
-        return Math.sqrt(x ** 2 + y ** 2) < 9 ? 
-        0
-        :
-        sampleNoise(x, y, t)
-        || sampleNoise(x, y, t);
-      
+        return Math.sqrt(x ** 2 + y ** 2) < 9 ?
+          0
+          :
+          sampleNoise(x, y, t)
+          || sampleNoise(x, y, t);
+
       case 'oneWayWave':
         const pis = Math.sqrt(x ** 2 + y ** 2)
-        if ( pis < 10 ) 
+        if (pis < 10)
           switch (true) {
             case (pis < 0):
               return ((Math.abs(x) + Math.abs(y)) * .25) - 1
@@ -61,9 +60,9 @@ export default function Water({ position, rotation }:{
   }
 
   const colorOfXYZT = (x: number, y: number, z: number, t: any) => {
-    const localRandom = randomSin(1001 * x-7 * y+seed)
-    const variation   = () => {
-      return localRandom()*0.01;
+    const localRandom = randomSin(1001 * x - 7 * y + seed)
+    const variation = () => {
+      return localRandom() * 0.01;
     }
 
     return true ? {
