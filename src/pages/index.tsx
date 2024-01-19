@@ -3,9 +3,11 @@ import Head from 'next/head'
 import {AnimationProvider} from "@/context/AnimateProvider";
 import {ThreeD} from "@/three";
 import Progress from "@/components/Progress";
+import {Stats} from "@/components/Stats";
 
 
 export default function () {
+  console.log("rerendering main page")
   return (
     <>
       <Head>
@@ -26,7 +28,8 @@ export default function () {
         }}
       >
         <AnimationProvider>
-          <Progress></Progress>
+          <Progress/>
+          <Stats/>
           <Canvas>
             <ThreeD/>
           </Canvas>

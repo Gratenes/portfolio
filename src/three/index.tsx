@@ -1,4 +1,4 @@
-import {useContext, useRef, useState} from "react";
+import {useCallback, useContext, useRef, useState} from "react";
 import {useFrame} from "@react-three/fiber";
 import {CameraControls, PerspectiveCamera, Sky} from "@react-three/drei";
 import {Bloom, EffectComposer} from "@react-three/postprocessing";
@@ -6,20 +6,10 @@ import {RiseBasedOnTime, Stars} from "@/three/components/Sky";
 import Island from "@/three/components/Island";
 import Water from "@/three/components/Water";
 import CameraAnimation from "@/three/effects/CameraAnimation";
-import {AnimationContext} from "@/context/AnimateProvider";
 
 export function ThreeD() {
-  const rotateRef = useRef<any>()
+  console.log("rerendering tree3d page")
   const cameraRef = useRef<any>()
-  const controlsRef = useRef<any>()
-
-  const {shouldAnimate } = useContext(AnimationContext);
-
-  useFrame(() => {
-    if (!rotateRef.current) return
-    rotateRef.current.rotation.x += 0.01
-    rotateRef.current.rotation.y += 0.01
-  })
 
   const IslandProps: any = {
     rotation: [0, 0, 0],
@@ -33,8 +23,7 @@ export function ThreeD() {
   return (
     <>
       <PerspectiveCamera makeDefault position={[0, 0, 10]} ref={cameraRef}/>
-      <CameraAnimation shouldAnimate={!shouldAnimate}/>
-      {shouldAnimate && <CameraControls ref={controlsRef} camera={cameraRef.current}/>}
+      <CameraAnimation camera={cameraRef.current}/>
 
       <spotLight
         position={[10, 100, 10]}  // change this to move the source of light
@@ -53,15 +42,15 @@ export function ThreeD() {
         <islands.Island/>
       </group>
 
+      <group {...IslandProps}>
+        <islands.Bloom/>
+      </group>
+
       {/* This is the group for items that are rotated that need to be rotated (for waves) */}
       <group rotation={[-(Math.PI / 2), 0, 0]} position={[0, -3, 0]}>
         <Water position={[0, 0, 0]} rotation={[0, 0, 0]}/>
       </group>
 
-
-      <group {...IslandProps}>
-        <islands.Bloom/>
-      </group>
 
       <Stars/>
       <RiseBasedOnTime time={.5}/>

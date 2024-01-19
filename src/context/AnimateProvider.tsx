@@ -1,20 +1,38 @@
-import { createContext, useContext, useEffect, useState } from "react";
+import {createContext, Dispatch, SetStateAction, useContext, useEffect, useState} from "react";
 import waypoints from "@/three/effects/waypoints";
 
 
 // Create the context
-export const AnimationContext = createContext({
+
+interface IPosition {
+  x: number;
+  y: number;
+  z: number;
+}
+
+interface IAnimationContext {
+  shouldAnimate: boolean;
+  setShouldAnimate: Dispatch<SetStateAction<boolean>>;
+  waypointIndex: number;
+  position: IPosition;
+  setPosition: (position: IPosition) => void;
+  rotation: IPosition;
+  setRotation: (rotation: IPosition) => void;
+  prevWaypoint: () => void;
+  nextWaypoint: () => void;
+}
+
+export const AnimationContext = createContext<IAnimationContext>({
   shouldAnimate: false,
-  setShouldAnimate: (_: boolean) => {},
+  setShouldAnimate: () => {},
   waypointIndex: 0,
   position: {x: 0, y: 0, z: 0},
-  setPosition: (_: {x: number, y: number, z: number}) => {},
+  setPosition: () => {},
   rotation: {x: 0, y: 0, z: 0},
-  setRotation: (_: {x: number, y: number, z: number}) => {},
+  setRotation: () => {},
   prevWaypoint: () => {},
   nextWaypoint: () => {},
 });
-
 
 // Animation Provider
 export const AnimationProvider = ({ children }:any) => {

@@ -20,4 +20,9 @@ export default ([{
   name: 'lookAtCave',
   position: new Vector3(-.911, -.6569, -2),
   rotation: new Vector3(-.1, .3, 0),
+}, {
+  name: 'viewstars',
+  position: new Vector3(51.26938, 277.8439, -23.45523),
+  rotation: new Vector3(-3.0629, 1.08285, 3.07208),
+  duration: .05,
 }])
