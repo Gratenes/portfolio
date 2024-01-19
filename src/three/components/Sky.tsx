@@ -3,7 +3,7 @@ import {useEffect, useRef} from "react";
 import THREE, {MeshBasicMaterial, Object3D, TextureLoader} from "three";
 
 
-export default function Stars() {
+export function Stars() {
   const amount = 3000;
   const radius = 300;
   const boxSize = {
