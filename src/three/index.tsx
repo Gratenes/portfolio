@@ -1,11 +1,13 @@
 import {useCallback, useContext, useRef, useState} from "react";
 import {useFrame} from "@react-three/fiber";
 import {CameraControls, PerspectiveCamera, Sky} from "@react-three/drei";
-import {Bloom, EffectComposer} from "@react-three/postprocessing";
+import {Bloom, EffectComposer } from "@react-three/postprocessing";
 import {RiseBasedOnTime, Stars} from "@/three/components/Sky";
 import Island from "@/three/components/Island";
 import Water from "@/three/components/Water";
 import CameraAnimation from "@/three/effects/CameraAnimation";
+import {Projects} from "@/three/components/Projects";
+import {Embedez} from "@/three/components/Projects/Embedez";
 
 export function ThreeD() {
   console.log("rerendering tree3d page")
@@ -37,6 +39,7 @@ export function ThreeD() {
         shadow-mapSize-height={1024}
       />
 
+
       {/* This is for the island (no rotation)                                            */}
       <group {...IslandProps}>
         <islands.Island/>
@@ -55,10 +58,10 @@ export function ThreeD() {
       <Stars/>
       <RiseBasedOnTime time={.5}/>
 
-      <EffectComposer>
+      <EffectComposer camera={cameraRef.current}>
         <Bloom
           intensity={1.0}    // The bloom intensity.
-          luminanceThreshold={0.9}    // luminance threshold. Raise this value to mask out darker elements in the scene.
+          luminanceThreshold={0.75}    // luminance threshold. Raise this value to mask out darker elements in the scene.
           luminanceSmoothing={0.025}  // smoothness of the luminance threshold. Range is [0, 1]
         />
 

@@ -19,6 +19,7 @@ export const Stats = () => {
       <p>
         {`z: ${rotation.z}`}
       </p>
+      <p>{rotation.x},{rotation.y},{rotation.z}</p>
     </div>
     <div>
       <p>
@@ -30,6 +31,7 @@ export const Stats = () => {
       <p>
         {`z: ${position.z}`}
       </p>
+      <p>{position.x},{position.y},{position.z}</p>
     </div>
     <button onClick={() => setShouldAnimate(a => !a)}>Toggle Animation</button>
     <button onClick={() => {console.log(position, rotation)}}>Refresh</button>

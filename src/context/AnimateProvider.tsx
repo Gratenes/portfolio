@@ -37,7 +37,7 @@ export const AnimationContext = createContext<IAnimationContext>({
 // Animation Provider
 export const AnimationProvider = ({ children }:any) => {
   const [shouldAnimate, setShouldAnimate] = useState(false);
-  const [waypointIndex, setWaypointIndex] = useState(0);
+  const [waypointIndex, setWaypointIndex] = useState(2);
   const [position, setPosition] = useState({x: 0, y: 0, z: 0});
   const [rotation, setRotation] = useState({x: 0, y: 0, z: 0});
 
